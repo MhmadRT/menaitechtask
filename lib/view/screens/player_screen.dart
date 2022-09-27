@@ -25,7 +25,7 @@ class PlayerScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Hero(
-                    tag: player.id.toString(),
+                    tag: player.id.toString()+player.id.toString(),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: CachedNetworkImage(
