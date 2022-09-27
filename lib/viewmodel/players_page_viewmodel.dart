@@ -18,6 +18,21 @@ class PlayerViewModel extends GetxController {
   bool isLoadMoreRunning = false;
 
   List<Player> players = [];
+  late ScrollController scrollController;
+
+  @override
+  void onInit() {
+    super.onInit();
+    checkConnectivity();
+    _firstLoad();
+    scrollController = ScrollController()..addListener(_loadMore);
+  }
+
+  @override
+  void dispose() {
+    scrollController.removeListener(_loadMore);
+    super.dispose();
+  }
 
   void _firstLoad() async {
     isFirstLoadRunning = true;
@@ -91,21 +106,5 @@ class PlayerViewModel extends GetxController {
       isLoadMoreRunning = false;
       update();
     }
-  }
-
-  late ScrollController scrollController;
-
-  @override
-  void onInit() {
-    super.onInit();
-    checkConnectivity();
-    _firstLoad();
-    scrollController = ScrollController()..addListener(_loadMore);
-  }
-
-  @override
-  void dispose() {
-    scrollController.removeListener(_loadMore);
-    super.dispose();
   }
 }
